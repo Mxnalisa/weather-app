@@ -127,8 +127,8 @@ main {
 
 .current-weather-forecast {
   display: flex;
-
   justify-content: space-around;
+  width: 100%;
 }
 
 .current-forecast-date {
