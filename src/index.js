@@ -75,9 +75,11 @@ function displayForecast(response) {
         <div class="current-forecast-icon">🌤️</div>
         <div class="current-forecast-temperatures">
           <div class="current-forecast-temperature">
-            <strong>15º</strong>
+            <strong>${Math.round(day.temperature.maximum)}º</strong>
           </div>
-          <div class="current-forecast-temperature">9º</div>
+          <div class="current-forecast-temperature">${Math.round(
+            day.temperature.minimum
+          )}º</div>
         </div>
       </div>
     `;
