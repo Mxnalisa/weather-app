@@ -1,5 +1,3 @@
-let apiKey = "b2a5adcct04b33178913oc335f405433";
-
 function displayTemperature(response) {
   let temperatureElement = document.querySelector("#current-temperature");
   let temperature = response.data.temperature.current;
@@ -8,8 +6,8 @@ function displayTemperature(response) {
   let descriptionElement = document.querySelector("#current-condition");
   let humidityElement = document.querySelector("#current-humidity");
   let windSpeedElement = document.querySelector("#current-wind-speed");
-  let iconElement = document.querySelector("#icon");
   let date = new Date(response.data.time * 1000);
+  let iconElement = document.querySelector("#icon");
 
   cityElement.innerHTML = response.data.city;
   dateElement.innerHTML = formatDate(date);
@@ -17,18 +15,9 @@ function displayTemperature(response) {
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   temperatureElement.innerHTML = Math.round(temperature);
-  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="current-temperature-icon" />`;
 
   getForecast(response.data.city);
-}
-
-function search(event) {
-  event.preventDefault();
-  let searchInputElement = document.querySelector("#search-input");
-  let city = searchInputElement.value;
-
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayTemperature);
 }
 
 function formatDate(date) {
@@ -52,6 +41,18 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function getCity(city) {
+  let apiKey = "d7852e3faob94308902a4f5e758t6a40";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios(apiUrl).then(displayTemperature);
+}
+
+function search(event) {
+  event.preventDefault();
+  let searchInputElement = document.querySelector("#search-input");
+  let city = searchInputElement.value;
+}
+
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -60,8 +61,9 @@ function formatDay(timestamp) {
 }
 
 function getForecast(city) {
+  let apiKey = "d7852e3faob94308902a4f5e758t6a40";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  axios(apiUrl).then(displayForecast);
 }
 
 function displayForecast(response) {
@@ -69,20 +71,23 @@ function displayForecast(response) {
 
   response.data.daily.forEach(function (day, index) {
     if (index < 5) {
-      forecastHtml += `
-        <div class="weather-forecast-day">
-          <div class="weather-forecast-date">${formatDay(day.time)}</div>
-          <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
-          <div class="weather-forecast-temperatures">
-            <div class="weather-forecast-temperature">
-              <strong>${Math.round(day.temperature.maximum)}º</strong>
-            </div>
-            <div class="weather-forecast-temperature">${Math.round(
-              day.temperature.minimum
-            )}º</div>
+      forecastHtml =
+        forecastHtml +
+        `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${formatDay(day.time)}</div>
+
+        <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature">
+            <strong>${Math.round(day.temperature.maximum)}º</strong>
           </div>
+          <div class="weather-forecast-temperature">${Math.round(
+            day.temperature.minimum
+          )}º</div>
         </div>
-      `;
+      </div>
+    `;
     }
   });
 
@@ -92,3 +97,6 @@ function displayForecast(response) {
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
+
+displayForecast();
+getCity("Pretoria");
