@@ -68,7 +68,7 @@ function displayForecast(response) {
   let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
-  days.forEach(function (day) {
+  response.data.daily.forEach.forEach(function (day) {
     forecastHtml += `
       <div class="weather-forecast-day">
         <div class="current-forecast-date">${day}</div>
