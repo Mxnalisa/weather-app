@@ -51,6 +51,7 @@ function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
+  getCity("Pretoria");
 }
 
 function formatDay(timestamp) {
@@ -98,5 +99,4 @@ function displayForecast(response) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-displayForecast();
-getCity("Pretoria");
+getForecast();
