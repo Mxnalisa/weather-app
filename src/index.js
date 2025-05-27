@@ -65,13 +65,12 @@ function getForecast(city) {
 }
 
 function displayForecast(response) {
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
 
   response.data.daily.forEach.forEach(function (day) {
     forecastHtml += `
       <div class="weather-forecast-day">
-        <div class="current-forecast-date">${day}</div>
+        <div class="current-forecast-date">Tue</div>
         <div class="current-forecast-icon">🌤️</div>
         <div class="current-forecast-temperatures">
           <div class="current-forecast-temperature">
