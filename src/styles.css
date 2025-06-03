@@ -29,6 +29,7 @@ html {
 }
 
 video {
+  height: calc(var(--vh, 1vh) * 100);
   overscroll-behavior: none;
   touch-action: manipulation;
   position: absolute;
