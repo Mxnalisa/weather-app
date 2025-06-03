@@ -54,7 +54,8 @@ function getCity(city) {
 function search(event) {
   event.preventDefault();
   let searchInputElement = document.querySelector("#search-input");
-  search(searchInput.value);
+  getCity(searchInputElement.value);
+  getForecast(searchInputElement.value);
 }
 
 function formatDay(timestamp) {
