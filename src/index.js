@@ -27,7 +27,7 @@ function search(event) {
 
   axios.get(apiUrl).then(displayTemperature);
 }
-let apiKey = "b2a5adcct04b33178913oc335f405433";
+let apiKey = "d7852e3faob94308902a4f5e758t6a40";
 
 function formatDate(date) {
   let minutes = date.getMinutes();
